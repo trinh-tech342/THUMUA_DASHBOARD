@@ -1,31 +1,34 @@
-function addRow() {
-    const table = document.getElementById("purchaseTable").getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
+const SCRIPT_URL = 'DÁN_LINK_WEB_APP_URL_CỦA_BẠN_VÀO_ĐÂY';
 
-    newRow.innerHTML = `
-        <td><input type="date" name="date[]" required></td>
-        <td><input type="text" name="material[]" placeholder="Tên nguyên liệu" required></td>
-        <td><input type="text" name="supplier[]" placeholder="Nhà cung cấp" required></td>
-        <td><input type="number" name="quantity[]" placeholder="0" min="1" required></td>
-        <td><input type="text" name="purpose[]" placeholder="Sản xuất/Kho..."></td>
-        <td><button type="button" class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
-    `;
-}
-
-function deleteRow(btn) {
-    const row = btn.parentNode.parentNode;
-    // Đảm bảo luôn còn ít nhất 1 dòng
-    const rowCount = document.getElementById("purchaseTable").rows.length;
-    if (rowCount > 2) {
-        row.parentNode.removeChild(row);
-    } else {
-        alert("Phải có ít nhất một dòng dữ liệu!");
-    }
-}
-
-// Xử lý gửi form (ví dụ)
 document.getElementById('purchaseForm').onsubmit = function(e) {
     e.preventDefault();
-    alert("Dữ liệu đã được sẵn sàng để gửi đi!");
-    // Tại đây bạn có thể dùng Fetch API hoặc AJAX để gửi dữ liệu về server
+    
+    const table = document.getElementById("purchaseTable");
+    const rows = table.getElementsByTagName('tbody')[0].rows;
+    const data = [];
+
+    // Thu thập dữ liệu từ từng hàng
+    for (let i = 0; i < rows.length; i++) {
+        data.push({
+            date: rows[i].querySelector('input[name="date[]"]').value,
+            material: rows[i].querySelector('input[name="material[]"]').value,
+            supplier: rows[i].querySelector('input[name="supplier[]"]').value,
+            quantity: rows[i].querySelector('input[name="quantity[]"]').value,
+            purpose: rows[i].querySelector('input[name="purpose[]"]').value
+        });
+    }
+
+    // Gửi dữ liệu bằng Fetch API
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        alert("Đã lưu dữ liệu vào Google Sheets thành công!");
+        document.getElementById('purchaseForm').reset(); // Xóa form sau khi gửi
+    })
+    .catch(error => {
+        console.error('Lỗi:', error);
+        alert("Có lỗi xảy ra khi gửi dữ liệu.");
+    });
 };
