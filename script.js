@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOmzOTu0kpVr1yNs4OT9nI9sh5rNGzh4kk6K7JiEyCJDq6gVNiQbmsGhuOSglNc-Ab/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAmL-1Vc9RkbwXipkFgsXkf3jeaHJq2TYsQq4RF0-Jm-cJsoroBiH4OMhjwiNqQNOW/exec';
 
 document.getElementById('purchaseForm').onsubmit = function(e) {
     e.preventDefault();
