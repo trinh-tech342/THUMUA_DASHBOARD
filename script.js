@@ -18,17 +18,23 @@ document.getElementById('purchaseForm').onsubmit = function(e) {
         });
     }
 
-    // Gửi dữ liệu bằng Fetch API
-    fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify(data),
-    })
-    .then(response => {
-        alert("Đã lưu dữ liệu vào Google Sheets thành công!");
-        document.getElementById('purchaseForm').reset(); // Xóa form sau khi gửi
-    })
-    .catch(error => {
-        console.error('Lỗi:', error);
-        alert("Có lỗi xảy ra khi gửi dữ liệu.");
-    });
-};
+// Thay đổi phần Fetch trong script.js
+fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors', // Thêm dòng này để bỏ qua chặn trình duyệt
+    cache: 'no-cache',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+})
+.then(() => {
+    // Vì dùng 'no-cors', trình duyệt không đọc được phản hồi thành công
+    // nên chúng ta mặc định báo thành công nếu không rơi vào .catch
+    alert("Dữ liệu đã được gửi đi! Vui lòng kiểm tra Google Sheet.");
+    document.getElementById('purchaseForm').reset();
+})
+.catch(error => {
+    console.error('Lỗi:', error);
+    alert("Có lỗi xảy ra khi kết nối.");
+});
