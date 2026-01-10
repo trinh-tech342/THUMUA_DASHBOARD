@@ -80,3 +80,32 @@ button {
 }
 
 .btn-delete:hover { background-color: #da190b; }
+/* Tùy chỉnh thêm cho phần actions để nút nằm đẹp hơn */
+.left-actions {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa 2 nút bên trái */
+}
+
+.btn-open-sheet {
+    text-decoration: none;
+    background-color: #00796b; /* Màu xanh lá đậm đặc trưng của Google Sheets */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid #004d40;
+}
+
+.btn-open-sheet:hover {
+    background-color: #004d40;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-1px);
+}
+
+/* Điều chỉnh lại nút Submit cho cân đối */
+.btn-submit {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
