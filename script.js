@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwF7kMHoFb3fgfCQj4Bng1wB6jS24qg5-iXPOWod87iIFG94vfEesT8cvus9C5UE0b_/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzjs9w0mHpUhkWfJQNKQFzQvYuJ2juj3zbMP3veuG7KuQDRTVDVZGifpqN2U1Cx0WxS/exec';
 
 // 1. Hàm thêm dòng mới
 function addRow() {
